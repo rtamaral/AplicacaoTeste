@@ -1,0 +1,79 @@
+﻿@model CadastroProdutos.Models.ProdutoViewModel
+
+@{
+    ViewBag.Title = "Edita Produto";
+}
+
+<h1>Editar Produto</h1>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Descricao, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Descricao, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Descricao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(m => m.Ativo, "true")
+                <label for="Radio1" class="clslab">Sim</label>
+
+                @Html.RadioButtonFor(m => m.Ativo, "false")
+                <label for="Radio2" class="clslab">Não</label>
+                @Html.ValidationMessageFor(m => m.Ativo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Categoria.Id, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.CategoriaId,
+                                   new SelectList(ViewBag.Categorias, "Id", "Nome"),
+                                   "Escolha a categoria", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CategoriaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Perecivel, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(m => m.Perecivel, "true")
+                <label for="Radio1" class="clslab">Sim</label>
+
+                @Html.RadioButtonFor(m => m.Perecivel, "false")
+                <label for="Radio2" class="clslab">Não</label>
+                @Html.ValidationMessageFor(m => m.Perecivel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar alterações" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

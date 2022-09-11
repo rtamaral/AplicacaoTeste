@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CadastroProdutos.Models.ProdutoViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Produtos</h2>
+<p>
+    @Html.ActionLink("Incluir Novo Produto", "Create", "Produto", new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+        <th>@Html.DisplayNameFor(model => model.Categoria.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Ativo)</th>
+        <th>@Html.DisplayNameFor(model => model.Perecivel)</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Descricao)</td>
+            <td>@Html.DisplayFor(modelItem => item.Categoria.Nome)</td>
+
+
+            @if (item.Ativo == true)
+            {
+                <td>@Html.DisplayFor(modelItem => item.Ativo) <label for="Radio1" class="clslab">Sim</label></td>
+
+            }
+            @if (item.Ativo == false)
+            {
+                <td>@Html.DisplayFor(modelItem => item.Ativo) <label for="Radio2" class="clslab">Não</label></td>
+            }
+
+            @if (item.Perecivel == true)
+            {
+                <td>@Html.DisplayFor(modelItem => item.Perecivel) <label for="Radio1" class="clslab">Sim</label></td>
+
+            }
+            @if (item.Perecivel == false)
+            {
+                <td>@Html.DisplayFor(modelItem => item.Perecivel) <label for="Radio2" class="clslab">Não</label></td>
+            }
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { Id = item.Id }) |
+            @Html.ActionLink("Deletar", "Delete", new { Id = item.Id }) |
+            @Html.ActionLink("Visualizar", "Visualizar", new { Id = item.Id })
+        </td>
+        </tr>
+    }
+</table>
+
